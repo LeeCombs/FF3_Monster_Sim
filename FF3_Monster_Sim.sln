@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FF3_Monster_Sim", "FF3_Monster_Sim\FF3_Monster_Sim.vcxproj", "{30FAFE7B-669E-4BA1-99F5-C6F89E053493}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{30FAFE7B-669E-4BA1-99F5-C6F89E053493}.Release|x64.Build.0 = Release|x64
 		{30FAFE7B-669E-4BA1-99F5-C6F89E053493}.Release|x86.ActiveCfg = Release|Win32
 		{30FAFE7B-669E-4BA1-99F5-C6F89E053493}.Release|x86.Build.0 = Release|Win32
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Debug|x64.ActiveCfg = Debug|x64
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Debug|x64.Build.0 = Debug|x64
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Debug|x86.ActiveCfg = Debug|Win32
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Debug|x86.Build.0 = Debug|Win32
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Release|x64.ActiveCfg = Release|x64
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Release|x64.Build.0 = Release|x64
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Release|x86.ActiveCfg = Release|Win32
+		{43C5E8AB-246E-4CD2-9245-C6BE6C7F0876}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

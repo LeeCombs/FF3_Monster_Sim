@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Monster.h"
 
 int WinMain()
 {
@@ -15,8 +16,13 @@ int WinMain()
 				window.close();
 		}
 
+		Monster mon;
+		sf::CircleShape monsterShape(mon.size);
+		monsterShape.setFillColor(sf::Color::Red);
+
 		window.clear();
 		window.draw(shape);
+		window.draw(monsterShape);
 		window.display();
 	}
 
