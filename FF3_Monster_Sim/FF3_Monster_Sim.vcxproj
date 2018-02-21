@@ -147,11 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enums.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Spell.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Spell.h" />
   </ItemGroup>

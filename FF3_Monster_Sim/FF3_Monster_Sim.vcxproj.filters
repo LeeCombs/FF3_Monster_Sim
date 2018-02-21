@@ -24,12 +24,18 @@
     <ClCompile Include="Spell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enums.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Spell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

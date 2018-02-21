@@ -16,9 +16,9 @@ namespace UnitTest
 			// TODO: Your test code here
 			ff3j::Spell spell;
 			spell.setPower(0);
-			Assert::AreEqual(0, spell.getPower());
+			Assert::AreEqual(0, (int)spell.getPower());
 			spell.setPower(256);
-			Assert::AreEqual(0, spell.getPower());
+			Assert::AreEqual(0, (int)spell.getPower());
 		}
 	};
 }
