@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "Monster.h"
-#include "../FF3_Monster_Sim/Monster.cpp"
+#include "Spell.h"
+#include "../FF3_Monster_Sim/Spell.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,8 +14,11 @@ namespace UnitTest
 		TEST_METHOD(TestMethod1)
 		{
 			// TODO: Your test code here
-			Monster mon;
-			Assert::AreEqual(75, mon.size);
+			ff3j::Spell spell;
+			spell.setPower(0);
+			Assert::AreEqual(0, spell.getPower());
+			spell.setPower(256);
+			Assert::AreEqual(0, spell.getPower());
 		}
 	};
 }

@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Monster.h"
+#include "Spell.h"
+#include <iostream>
 
 int WinMain()
 {
@@ -15,6 +17,10 @@ int WinMain()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+
+		ff3j::Spell spell;
+		spell.setLevel(1);
+		
 
 		Monster mon;
 		sf::CircleShape monsterShape(mon.size);
