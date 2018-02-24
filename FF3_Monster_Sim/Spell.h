@@ -36,7 +36,9 @@ namespace ff3j {
 		//
 	private:
 		//
-		unsigned char level, power, accuracy;
+		unsigned char level = 0;
+		unsigned char power = 0;
+		unsigned char accuracy = 0;
 		bool reflectable;
 		string name;
 
