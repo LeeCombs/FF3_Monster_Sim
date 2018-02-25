@@ -81,7 +81,7 @@ namespace UnitTest
 
 		TEST_METHOD(SpellDefaults)
 		{
-			// Ensure defaults are expected
+			// Ensure defaults are expected values
 			Spell spell;
 
 			Assert::AreEqual(0, (int)spell.getPower());
