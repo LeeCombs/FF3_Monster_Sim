@@ -24,7 +24,7 @@ namespace ff3j {
 	void Spell::setReflectable(bool b) { reflectable = b; }
 	void Spell::setType(SpellType st) { type = st; }
 	void Spell::setTarget(Target t) { target = t; }
-	void Spell::setElements(std::vector<Element> e) { elements = e; }
+	void Spell::setElements(std::unordered_set<Element> e) { elements = e; }
 
 	//-----------------------------
 	// Getters
@@ -36,6 +36,7 @@ namespace ff3j {
 	string Spell::getName() { return name; }
 	bool Spell::getReflectable() { return reflectable; }
 	SpellType Spell::getType() { return type; }
-	std::vector<Element> Spell::getElements() { return elements; }
+	Target Spell::getTarget() { return target; }
+	std::unordered_set<Element> Spell::getElements() { return elements; }
 }
 

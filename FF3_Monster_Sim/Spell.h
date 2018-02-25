@@ -1,12 +1,26 @@
 #pragma once
-#include <string>
 #include "Enums.h"
-#include <vector>
+#include <string>
+#include <unordered_set>
 
 using namespace std;
 
 namespace ff3j {
-	enum class SpellType :int { black, white, summon, item, ability, terrain };
+	enum class SpellType { black, white, summon, item, ability, terrain };
+	enum class SpellEffect {
+		// Damage
+		damage, drainHP,
+		// Statuses
+		addSleep, addPoison, addBlind, addToad, addMini, addParalysis, addKO, addConfuse,
+		addMute, addPetrify, addThirdPetrify, addHalfPetrify, addTwoThirdPetrify,
+		// Buffs
+		addReflect, addHaste, addProtect, 
+		// Healing
+		healHP, curePoison, cureBlind, cureKO, curePetrify,
+		cureMute, cureMini, cureFrog, cureAll,
+		// Other
+		scanHP, removeReflect
+	};
 
 	class Spell
 	{
@@ -22,7 +36,7 @@ namespace ff3j {
 		void setReflectable(bool);
 		void setType(SpellType);
 		void setTarget(Target);
-		void setElements(std::vector<Element>);
+		void setElements(std::unordered_set<Element>);
 
 		// Getters
 		unsigned char getLevel();
@@ -31,7 +45,8 @@ namespace ff3j {
 		string getName();
 		bool getReflectable();
 		SpellType getType();
-		std::vector<Element> getElements();
+		Target getTarget();
+		std::unordered_set<Element> getElements();
 	protected:
 		//
 	private:
@@ -39,12 +54,12 @@ namespace ff3j {
 		unsigned char level = 0;
 		unsigned char power = 0;
 		unsigned char accuracy = 0;
-		bool reflectable;
+		bool reflectable = false;
 		string name;
 
 		SpellType type;
 		Target target;
-		std::vector<Element> elements;
+		std::unordered_set<Element> elements = { Element::none };
 
 		// TODO: Statuses, both temp and perm.
 		
