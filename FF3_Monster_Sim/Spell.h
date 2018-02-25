@@ -16,10 +16,10 @@ namespace ff3j {
 		// Buffs
 		addReflect, addHaste, addProtect, 
 		// Healing
-		healHP, curePoison, cureBlind, cureKO, curePetrify,
+		heal, curePoison, cureBlind, cureKO, curePetrify,
 		cureMute, cureMini, cureFrog, cureAll,
 		// Other
-		scanHP, removeReflect
+		scanHP, removeReflect, viewMap, singleHP
 	};
 
 	class Spell

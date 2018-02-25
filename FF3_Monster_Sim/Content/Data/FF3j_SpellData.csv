@@ -25,12 +25,30 @@ Flare,black,[None],200,100,damage,true,enemies,8
 Death,black,[None],0,35,addKO,false,singleEnemy,8
 Meteo,black,[None],180,100,damage,false,allEnemies,8
 
-
-
-
-
-
-
+Cure,white,[Recovery],42,100,heal,false,allies,1
+Pure,white,[None],0,50,curePoison,false,singleAlly,1
+Sight,white,[None],0,100,viewMap,false,singleEnemy,1
+Aero,white,[Air,Ice],45,100,damage,true,enemies,2
+Toad,white,[None],0,0,addToad,false,singleEnemy,2
+Mini,white,[None],0,0,addMini,false,singleEnemy,2
+Cure2,white,[Recovery],125,100,heal,false,allies,3
+Exit,white,[None],0,0,addKO,false,singleEnemy,3
+Wash,white,[None],0,75,cureBlind,false,singleAlly,3
+Libra,white,[None],0,100,scanHP,false,singleEnemy,4
+Confu,white,[None],0,25,addConfuse,false,enemies,4
+Mute,white,[None],0,60,addMute,false,enemies,4
+Cure3,white,[Recovery],180,100,heal,false,allies,5
+Life,white,[Recovery],1,15,cureKO,false,singleAlly,5
+Sage,white,[None],5,75,addSafe,false,singleAlly,5
+Aero2,white,[Air,Ice],115,100,damage,true,enemies,6
+Soft,white,[None],0,60,curePetrify,false,singleAlly,6
+Haste,white,[None],5,16,addHaste,false,singleAlly,6
+Cure4,white,[Recovery],220,100,heal,false,allies,7
+Heal,white,[None],0,60,cureAll,false,singleAlly,7
+Wall,white,[None],0,75,addReflect,false,singleAlly,7
+WWind,white,[Air],4,40,singleHP,false,enemies,8
+Life2,white,[Recovery],255,0,cureKO,false,singleAlly,8
+Holy,white,[Holy],160,100,damage,true,singleEnemy,8
 
 
 
