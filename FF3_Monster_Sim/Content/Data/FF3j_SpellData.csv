@@ -50,6 +50,49 @@ WWind,white,[Air],4,40,singleHP,false,enemies,8
 Life2,white,[Recovery],255,0,cureKO,false,singleAlly,8
 Holy,white,[Holy],160,100,damage,true,singleEnemy,8
 
+Earthquake,terrain,[Earth],90,50,damage,false,allEnemies,0
+Quicksand,terrain,[None],0,30,addKO,false,singleEnemy,0
+AirBlade,terrain,[Air],120,30,damage,false,singleEnemy,0
+Sinkhole,terrain,[None],0,40,addKO,false,singleEnemy,0
+Rapids,terrain,[Thunder],0,40,addKO,false,singleEnemy,0
+Waterspout,terrain,[Air],120,60,damage,false,singleEnemy,0
+Tornado,terrain,[Air],120,60,damage,false,singleEnemy,0
+CaveIn,terrain,[Earth],120,40,damage,false,allEnemies,0
+
+Recovery,item,[Recovery],30,100,heal,false,singleAlly,0
+EchoHerb,item,[Recovery],0,100,cureMute,false,singleAlly,0
+LuckMallet,item,[Recovery],0,100,cureMini,false,singleAlly,0
+MaidKiss,item,[Recovery],0,100,cureToad,false,singleAlly,0
+
+Flame,ability,[Fire],40,100,damage,true,allEnemies,0
+Blizzard,ability,[Ice],40,100,damage,true,allEnemies,0
+Thunder,ability,[Thunder],40,100,damage,true,allEnemies,0
+Glare(Slp),ability,[None],0,80,addSleep,false,singleEnemy,0
+Glare(Conf),ability,[None],0,80,addConfuse,false,singleEnemy,0
+Glare(Petr),ability,[None],0,80,addPetrify,false,singleEnemy,0
+Breath,ability,[None],0,60,addParalysis,false,singleEnemy,0
+Mindblast,ability,[None],0,80,addParalysis,false,allEnemies,0
+Poison,ability,[None],0,80,addPoison,true,allEnemies,0
+Quake,ability,[Earth],80,100,damage,false,allEnemies,0
+AtomEdge,ability,[None],32,100,damage,false,allEnemies,0
+Tsunami,ability,[None],37,100,damage,false,allEnemies,0
+MegaFlare,ability,[None],80,100,damage,true,allEnemies,0
+FlareWave,ability,[None],80,100,damage,false,allEnemies,0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
