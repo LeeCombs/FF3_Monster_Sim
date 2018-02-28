@@ -37,6 +37,7 @@ namespace ff3j {
 		void setType(SpellType);
 		void setTarget(Target);
 		void setElements(std::unordered_set<Element>);
+		void setStatuses(std::unordered_set<Status>);
 
 		// Getters
 		unsigned char getLevel();
@@ -47,6 +48,8 @@ namespace ff3j {
 		SpellType getType();
 		Target getTarget();
 		std::unordered_set<Element> getElements();
+		std::unordered_set<Status> getStatuses();
+
 	protected:
 		//
 	private:
@@ -60,8 +63,7 @@ namespace ff3j {
 		SpellType type;
 		Target target;
 		std::unordered_set<Element> elements = { Element::none };
-
-		// TODO: Statuses, both temp and perm.
+		std::unordered_set<Status> statuses = {};
 		
 	};
 

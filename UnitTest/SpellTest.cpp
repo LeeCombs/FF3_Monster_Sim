@@ -74,6 +74,11 @@ namespace UnitTest
 			spell.setElements(expectedElements);
 			Assert::IsTrue(expectedElements == spell.getElements());
 
+			// Statuses
+			unordered_set<Status> expectedStatuses = { Status::blind, Status::mini };
+			spell.setStatuses(expectedStatuses);
+			Assert::IsTrue(expectedStatuses == spell.getStatuses());
+
 
 			// TODO:
 			// Effects
@@ -89,6 +94,7 @@ namespace UnitTest
 			Assert::AreEqual(0, (int)spell.getLevel());
 			Assert::IsFalse(spell.getReflectable());
 			Assert::IsTrue(Utils::SetContains<Element>(spell.getElements(), Element::none));
+			Assert::AreEqual(0, (int)spell.getStatuses().size());
 		}
 
 	private:

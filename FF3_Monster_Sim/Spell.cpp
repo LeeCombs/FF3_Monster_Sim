@@ -25,6 +25,7 @@ namespace ff3j {
 	void Spell::setType(SpellType st) { type = st; }
 	void Spell::setTarget(Target t) { target = t; }
 	void Spell::setElements(std::unordered_set<Element> e) { elements = e; }
+	void Spell::setStatuses(std::unordered_set<Status> s) { statuses = s; }
 
 	//-----------------------------
 	// Getters
@@ -38,5 +39,6 @@ namespace ff3j {
 	SpellType Spell::getType() { return type; }
 	Target Spell::getTarget() { return target; }
 	std::unordered_set<Element> Spell::getElements() { return elements; }
+	std::unordered_set<Status> Spell::getStatuses() { return statuses; }
 }
 
