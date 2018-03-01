@@ -10,14 +10,11 @@ using namespace std::placeholders;
 
 using namespace ff3j;
 
-namespace UnitTest
-{		
-	TEST_CLASS(SpellTest)
-	{
+namespace UnitTest {		
+	TEST_CLASS(SpellTest) {
 	public:
 		
-		TEST_METHOD(GetterSetterTest)
-		{
+		TEST_METHOD(GetterSetterTest) {
 			// Ensure getters and setters act as expected
 			Spell spell;
 
@@ -84,8 +81,7 @@ namespace UnitTest
 			// Effects
 		}
 
-		TEST_METHOD(SpellDefaults)
-		{
+		TEST_METHOD(SpellDefaults) {
 			// Ensure defaults are expected values
 			Spell spell;
 
@@ -95,6 +91,37 @@ namespace UnitTest
 			Assert::IsFalse(spell.getReflectable());
 			Assert::IsTrue(Utils::SetContains<Element>(spell.getElements(), Element::none));
 			Assert::AreEqual(0, (int)spell.getStatuses().size());
+		}
+
+		TEST_METHOD(StatusTests) {
+			Spell spell;
+
+			// Add a couple of statuses, ensure only the added status is present after adding
+			// remove the statuses and ensure they're all gone. 
+			// Also test that hasStatus() agrees with getStatuses()
+
+			Assert::IsFalse(spell.hasStatus(Status::blind));
+			Assert::IsFalse(Utils::SetContains<Status>(spell.getStatuses(), Status::blind));
+			Assert::IsFalse(spell.hasStatus(Status::confusion));
+			Assert::IsFalse(Utils::SetContains<Status>(spell.getStatuses(), Status::confusion));
+
+			spell.addStatus(Status::blind);
+			Assert::IsTrue(spell.hasStatus(Status::blind));
+			Assert::IsTrue(Utils::SetContains<Status>(spell.getStatuses(), Status::blind));
+			Assert::IsFalse(spell.hasStatus(Status::confusion));
+			Assert::IsFalse(Utils::SetContains<Status>(spell.getStatuses(), Status::confusion));
+
+			spell.addStatus(Status::confusion);
+			Assert::IsTrue(spell.hasStatus(Status::blind));
+			Assert::IsTrue(Utils::SetContains<Status>(spell.getStatuses(), Status::blind));
+			Assert::IsTrue(spell.hasStatus(Status::confusion));
+			Assert::IsTrue(Utils::SetContains<Status>(spell.getStatuses(), Status::confusion));
+
+			spell.clearStatuses();
+			Assert::IsFalse(spell.hasStatus(Status::blind));
+			Assert::IsFalse(Utils::SetContains<Status>(spell.getStatuses(), Status::blind));
+			Assert::IsFalse(spell.hasStatus(Status::confusion));
+			Assert::IsFalse(Utils::SetContains<Status>(spell.getStatuses(), Status::confusion));
 		}
 
 	private:

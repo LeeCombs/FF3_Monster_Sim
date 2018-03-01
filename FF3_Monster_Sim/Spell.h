@@ -28,6 +28,10 @@ namespace ff3j {
 		Spell();
 		~Spell();
 
+		void addStatus(Status);
+		bool hasStatus(Status);
+		void clearStatuses();
+
 		// Setters
 		void setLevel(unsigned char);
 		void setPower(unsigned char);

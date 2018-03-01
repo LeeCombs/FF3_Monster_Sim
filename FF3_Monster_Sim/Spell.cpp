@@ -1,4 +1,5 @@
 #include "Spell.h"
+#include "Utils.h"
 
 namespace ff3j {
 
@@ -11,6 +12,21 @@ namespace ff3j {
 	Spell::~Spell()
 	{
 		// Destructor
+	}
+
+	void Spell::addStatus(Status s) {
+		if (hasStatus(s)) return;
+		statuses.insert(s);
+		// TODO: Add status sprite
+	}
+
+	bool Spell::hasStatus(Status s) { 
+		return Utils::SetContains<Status>(statuses, s);
+	};
+
+	void Spell::clearStatuses() {
+		statuses.clear();
+		// TODO: Remove all status sprites
 	}
 
 	//-----------------------------
