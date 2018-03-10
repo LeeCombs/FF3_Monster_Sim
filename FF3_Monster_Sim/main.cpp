@@ -1,7 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Monster.h"
 #include "Spell.h"
-#include <iostream>
+#include "SpellManager.h"
+#include <string>
+
+using namespace std;
 
 int WinMain()
 {
@@ -20,12 +24,21 @@ int WinMain()
 
 		ff3j::Spell spell;
 		spell.setLevel(1);
-		
 
 		Monster mon;
+
+		ff3j::SpellResult res = ff3j::castSpell(mon, mon);
+
+		// string s = copy
+		// string &s = reference
+		// string const &s = unchangable reference
+		for (string const &s : res.results) {
+			string str = s;
+		}
+
+		// Draw
 		sf::CircleShape monsterShape(mon.size);
 		monsterShape.setFillColor(sf::Color::Red);
-
 		window.clear();
 		window.draw(shape);
 		window.draw(monsterShape);

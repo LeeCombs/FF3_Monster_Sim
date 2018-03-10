@@ -7,10 +7,13 @@ namespace ff3j {
 		return spell;
 	}
 
-	SpellResult castSpell(int caster, int target) {
+	SpellResult castSpell(Monster caster, Monster target) {
 		SpellResult res;
 		res.damage = 0;
-		res.results.push_back("?");
+		res.results.push_back("1");
+		res.results.push_back("two");
+		res.results.push_back("C");
+		res.results.push_back("IV");
 		return res;
 	}
 }

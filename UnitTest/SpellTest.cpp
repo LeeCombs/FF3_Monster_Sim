@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "Spell.h"
+#include "../FF3_Monster_Sim/Spell.h"
 #include "../FF3_Monster_Sim/Spell.cpp"
+#include "../FF3_Monster_Sim/Utils.h"
 #include <functional>
-#include "Utils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std::placeholders;
