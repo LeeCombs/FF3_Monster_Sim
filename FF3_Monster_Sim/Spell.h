@@ -3,8 +3,6 @@
 #include <string>
 #include <unordered_set>
 
-using namespace std;
-
 namespace ff3j {
 	enum class SpellType { black, white, summon, item, ability, terrain };
 	enum class SpellEffect {
@@ -36,7 +34,7 @@ namespace ff3j {
 		void setLevel(unsigned char);
 		void setPower(unsigned char);
 		void setAccuracy(unsigned char);
-		void setName(string);
+		void setName(std::string);
 		void setReflectable(bool);
 		void setType(SpellType);
 		void setTarget(Target);
@@ -47,7 +45,7 @@ namespace ff3j {
 		unsigned char getLevel();
 		unsigned char getPower();
 		unsigned char getAccuracy();
-		string getName();
+		std::string getName();
 		bool getReflectable();
 		SpellType getType();
 		Target getTarget();
@@ -62,7 +60,7 @@ namespace ff3j {
 		unsigned char power = 0;
 		unsigned char accuracy = 0;
 		bool reflectable = false;
-		string name;
+		std::string name;
 
 		SpellType type;
 		Target target;
