@@ -7,7 +7,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std::placeholders;
-
+using namespace std;
 using namespace ff3j;
 
 namespace UnitTest {		
