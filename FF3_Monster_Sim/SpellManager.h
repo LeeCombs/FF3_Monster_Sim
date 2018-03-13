@@ -7,17 +7,19 @@
 
 namespace ff3j {
 
+	struct SpellResult {
+		int damage;
+		std::vector<std::string> results;
+	};
+
 	// Private vars and methods exist in an anonymous namespace
 	namespace {
 		const std::string spellData; // TODO: Determine format of data
 		const std::string FAILED_SPELL_MESSAGE = "Ineffective";
 		bool initialized = false;
-	}
 
-	struct SpellResult {
-		int damage;
-		std::vector<std::string> results;
-	};
+		int GetDamage(Spell);
+	}
 
 	void loadData();
 

@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 #include "Monster.h"
 #include "Spell.h"
 #include "SpellManager.h"
-#include <string>
 
 using namespace std;
 
@@ -12,6 +12,7 @@ int WinMain()
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
+
 
 	while (window.isOpen())
 	{
