@@ -1,8 +1,11 @@
 #include "Utils.h"
 #include <random>
 
-namespace Utils {
+namespace ff3j {
+    //
+}
 
+namespace Utils {
 	//============================
 	// Random numbers
 	//============================

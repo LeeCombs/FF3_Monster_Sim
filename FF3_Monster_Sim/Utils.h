@@ -2,8 +2,11 @@
 #include <unordered_set>
 #include <random>
 
-namespace Utils {
+namespace ff3j {
+    //
+}
 
+namespace Utils {
     //============================
     // Dealing with containers
     //============================

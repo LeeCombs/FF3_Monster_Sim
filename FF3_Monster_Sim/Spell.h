@@ -55,7 +55,6 @@ namespace ff3j {
     protected:
         //
     private:
-        //
         unsigned char level = 0;
         unsigned char power = 0;
         unsigned char accuracy = 0;

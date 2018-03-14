@@ -6,6 +6,7 @@
 #include "SpellManager.h"
 
 using namespace std;
+using namespace ff3j;
 
 int WinMain()
 {
@@ -23,12 +24,12 @@ int WinMain()
                 window.close();
         }
 
-        ff3j::Spell spell;
+        Spell spell;
         spell.setLevel(1);
 
         Monster mon;
 
-        ff3j::SpellResult res = ff3j::castSpell(mon, mon);
+        SpellResult res = castSpell(mon, mon);
 
         // string s = copy
         // string &s = reference
@@ -38,7 +39,7 @@ int WinMain()
         }
 
         // Draw
-        sf::CircleShape monsterShape(mon.size);
+        sf::CircleShape monsterShape(75);
         monsterShape.setFillColor(sf::Color::Red);
         window.clear();
         window.draw(shape);
