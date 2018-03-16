@@ -28,8 +28,7 @@ int WinMain()
         spell.setLevel(1);
 
         Monster mon;
-
-        SpellResult res = castSpell(mon, mon);
+        SpellResult res = castSpell(spell, mon, mon);
 
         // string s = copy
         // string &s = reference

@@ -48,14 +48,18 @@ namespace ff3j {
         unsigned char getExp();
         unsigned char getGil();
         unsigned char getJobLevel();
+
         unsigned char getIntellect();
         unsigned char getMind();
+
         unsigned char getAttack();
         unsigned char getHits();
         unsigned char getAccuracy();
+
         unsigned char getDefense();
         unsigned char getBlocks();
         unsigned char getEvasion();
+
         unsigned char getMagicDefense();
         unsigned char getMagicBlocks();
         unsigned char getMagicResistance();

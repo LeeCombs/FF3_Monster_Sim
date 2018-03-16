@@ -24,6 +24,6 @@ namespace ff3j {
     void loadData();
 
     Spell getSpellByName(std::string);
-    SpellResult castSpell(Monster, Monster);
+    SpellResult castSpell(Spell, Monster, Monster);
     std::unordered_set<std::string> getSpellNames();
 }

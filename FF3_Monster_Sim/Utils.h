@@ -1,9 +1,10 @@
 #pragma once
 #include <unordered_set>
 #include <random>
+#include "Monster.h"
 
 namespace ff3j {
-    //
+    int calculateDamage(Monster, Monster);
 }
 
 namespace Utils {

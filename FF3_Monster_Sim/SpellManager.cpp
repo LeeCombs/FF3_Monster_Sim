@@ -5,66 +5,6 @@
 
 namespace ff3j {
 
-    int GetDamage(Spell spell) {
-        // Calculate damage
-
-        /* TODO:
-         * This needs to be run through the planning process as there is
-         * like 100 things happening here from a bunch of different sources.
-         */
-
-        //=============================================
-        // 1 - Get Base Damage
-        //=============================================
-        int baseDamage = spell.getPower();
-
-        //=============================================
-        // 2 - Apply base damage bonus and penalties
-        //=============================================
-        // baseDamage = (baseDamage + additiveBonuses) * multiplicativeBonuses
-        // if (actor.hasStatus(Mini || Toad)) && physical)
-        // - baseDamage = 0;
-
-        //=============================================
-        // 3 - Apply random range to base
-        //=============================================
-        baseDamage = Utils::getRandomInt(baseDamage, baseDamage * 1.5);
-
-        //=============================================
-        // 4 - Subtract target's defense
-        //=============================================
-        Monster target;
-        // baseDamage -= target.getMagicDefense();
-
-        //=============================================
-        // 5 - Get net attack Muliplier
-        //=============================================
-        int totalHits = 0;
-        // totalHits = Actor.RollHits() - Target.RollBlocks()
-        
-        // If kill spell...
-        // - if (target.level) >= (((attacker.level)/2)*3)/2)
-        // -- magicHit = 0;
-
-        // Toad, Mini, Life, Life2
-        // 100% accuracy against team, normal against enemies
-
-        // if (physical && (attacker.IsBackRow() || target.IsBackRow())
-        // - hit% = hit% / 2;
-
-        //=============================================
-        // 6 - Multiply base by net attack multipler
-        //=============================================
-        int finalDamage = baseDamage * totalHits;
-
-        //=============================================
-        // 7 Apply final damage bonuses/penalities
-        //=============================================
-        // finalDamage = finalDamage * (fdBonuses)
-
-        return finalDamage;
-    }
-
     void loadData() {
         // Read spellData.json and populate things
     }
@@ -75,13 +15,50 @@ namespace ff3j {
         return spell;
     }
 
-    SpellResult castSpell(Monster caster, Monster target) {
+    SpellResult castSpell(Spell spell, Monster caster, Monster target) {
         SpellResult res;
         res.damage = 0;
         res.results.push_back("1");
         res.results.push_back("two");
         res.results.push_back("C");
         res.results.push_back("IV");
+
+        // Calculate hit chance, damage, and multiplier
+
+        // TODO: Toad, Mini, Life, Life2 have 100% to hit on allies
+        int hitChance = spell.getAccuracy();
+        int damage = spell.getPower();
+        int magicAtkMult = 1;
+        switch (spell.getType()) {
+            case SpellType::black:
+            case SpellType::terrain:
+                hitChance += caster.getIntellect() / 2;
+                damage += caster.getIntellect() / 2;
+                magicAtkMult += (caster.getIntellect() / 16) + (caster.getLevel() / 16) + (caster.getJobLevel() / 32);
+                break;
+            case SpellType::white:
+                hitChance += caster.getMind() / 2;
+                // TODO: Non-offensive white spells ignore this step (Cure, Haste, Safe)
+                damage += caster.getMind() / 2;
+                magicAtkMult += (caster.getMind() / 16) + (caster.getLevel() / 16) + (caster.getJobLevel() / 32);
+                break;
+            case SpellType::summon:
+                hitChance += caster.getIntellect();
+                damage += caster.getIntellect();
+                magicAtkMult += (caster.getIntellect() / 8) + (((caster.getJobLevel() / 8)*3)/2);
+                break;
+            case SpellType::item:
+                hitChance = 100;
+                // lookup magicAtkMult
+                break;
+            default:
+                // TODO: How to handle Item and Ability types
+                // Item should always have 100%
+                break;
+        }
+
+
+
         return res;
     }
 
