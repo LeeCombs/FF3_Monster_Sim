@@ -7,11 +7,6 @@ namespace ff3j {
 
 
     int calculatePhysicalDamage(Monster attacker, Monster target) {
-        // Calculate damage
-
-        // if (target.hasWall() && target.isenemyteam) 
-        //      pick a target on attacker's team, and roll as if attacking ally
-        //      target.removeWall()
 
         //=============================================
         // 1 - Caculate Base Damage
@@ -43,8 +38,8 @@ namespace ff3j {
         // 2.3.1 - Elemental Resist
         // if (target.isresist(attack.element)) baseDamage /= 2;
 
-        /// 2.4 - Misc
-        // if (actor.hasStatus(Mini || Toad))) baseDamage = 0;
+        // 2.3.2 - Toad and Mini
+        // if (attacker.hasStatus(Mini || Toad))) baseDamage = 0;
 
         //=============================================
         // 3 - Apply random range to base
@@ -57,6 +52,9 @@ namespace ff3j {
 
         // 4.1 - Initial Defense
         int defense = target.getDefense();
+
+        // 4.1.2 - Self-Targetting
+        // if attacker is targeting ally, defense = 0;
 
         // 4.2 - Defense Bonuses
 
@@ -77,11 +75,7 @@ namespace ff3j {
         baseDamage -= defense;
 
         /// 4.5 - Misc
-
-        // if (targetting.self() && physical) defense = 0;
-        // if (targetting.ally()) magicDefense = 0; magicDefenseMult = 0;
         // if (target.hasMini || target.hasToad) defense && multipliers = 0;
-        // Buildup command: defense = 0, defenseMult = 0, magicDefense = 0;
 
 
         //=============================================
@@ -118,24 +112,22 @@ namespace ff3j {
         int defMult = 0;
 
         // 5.3.1 - Initial Value
+        defMult = target.getBlocks();
 
+        // 5.3.2 - Penalties
+
+        // 5.3.2.1 - Vulnerable
+        // if (target.isVulnerable()) defMult = 0;
+        
         // 5.4 - Evade %
         int evadeChance = 0;
 
         // 5.4.1 - Initial Value
+        evadeChance = target.getEvasion();
 
         // 5.5 - Net Attack Multiplier
         int netMult = Utils::rollSuccesses(atkMult, hitChance) - Utils::rollSuccesses(defMult, evadeChance);
         // if (netMult <= 0) return "Miss";
-
-        
-        /// 5.6 - Misc
-        // If kill spell: if (target.level >= ((attacker.level/2)*3)/2) magicHit = 0;
-
-        // Toad, Mini, Life, Life2
-        // 100% accuracy against team, normal against enemies
-
-        // if (spell==whitewind && hits) target.hp = (spell.power...spell.power * 2) return;
 
         //=============================================
         // 6 - Multiply base by net attack multipler
@@ -148,14 +140,9 @@ namespace ff3j {
 
         int finalDamage = baseDamage * netMult;
 
-        /// 6.1 - Misc
-        // if (spell==haste) target.addHaste(finalDamage, atkMult)
-        // if (spell==safe) target.addSafe(finalDamage)
-
         //=============================================
         // 7 - Apply final damage bonuses/penalities
         //=============================================
-        int fdBonus = 1;
 
         // 7.1 - Minimum Damage
         if (atkMult > 0 && finalDamage <= 0)
@@ -168,15 +155,6 @@ namespace ff3j {
                 break;
             }
         }
-
-        /// 7.3 - Misc
-        // If manually multi-targetting, finalDamage /= numTargets
-        // This does not apply to spells that always hit all targets
-
-        // Jump command: fdBonus = 3;
-        // Buildup command: (1) fdBonus = 2; (2) fdBonus = 3; (3) Overload, halve caster hp
-
-        finalDamage = finalDamage * fdBonus;
 
         //=============================================
         // 8 - Finally, return the result
