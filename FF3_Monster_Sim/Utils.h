@@ -25,4 +25,7 @@ namespace Utils {
         static std::mt19937 mt(rd());
     }
     int getRandomInt(int min, int max);
+
+
+    int rollSuccesses(int rolls, int successRate); // TODO: This name sucks
 };
