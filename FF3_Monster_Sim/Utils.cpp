@@ -161,6 +161,111 @@ namespace ff3j {
         //=============================================
         return finalDamage;
     }
+
+    int calculateSpellDamage(Monster attacker, Monster target) {
+
+        //=============================================
+        // 1 - CALCULATE BASE DAMAGE
+        //=============================================
+
+        // 1.1 - Black magic damage
+
+        // 1.2 - White magic damage
+
+        // 1.3 - Call magic damage
+
+        //=============================================
+        // 2 - APPLY BASE DAMAGE BONUSES AND PENALTIES
+        //=============================================
+
+        // 2.1 - Multiplicative bonus
+        // 2.1.1 - Elemental Weakness
+        // 2.1.2 - Targets that are toad, mini, buildup
+
+        // 2.2 Penalties
+        // 2.2.1 - Elemental resist
+
+        //=============================================
+        // 3 - APPLY RANDOM RANGE TO BASE DAMAGE
+        //=============================================
+       
+        
+        
+        //=============================================
+        // 4 - SUBTRACT TARGET'S DEFENSE
+        //=============================================
+        
+        // 4.1 - Initial defense
+        // 4.1.1 - Target defense
+        // 4.1.2 - Self-targetting
+
+        // 4.2 - Bonuses
+        // 4.2.1 - Safe
+
+        // 4.3 - Penalties
+        // 4.3.1 - Targets that are toad, mini, buildup
+
+        // 4.4 - Base damage calculation
+        
+        //=============================================
+        // 5 - CALCULATE NET ATTACK MULTIPLIER
+        //=============================================
+        
+        // 5.1 - AtkMult
+        // 5.1.1 - Black magic multiplier
+        // 5.1.2 - White magic multiplier
+        // 5.1.3 - Call magic multiplier
+        // 5.1.3 - Item multiplier
+        
+        // 5.2 - Hit chance
+        // 5.2.1 - Initial value
+        // 5.2.1.1 - Balck spell hit
+        // 5.2.1.2 - White spell hit
+        // 5.2.1.3 - Call spell hit
+        // 5.2.1.4 - Item hit
+        // 5.2.2 - Bonuses
+        // 5.2.2.1 - Toad and mini on allies
+        // 5.2.3 - Penalties
+        // 5.2.3.1 - Blind
+        // 5.2.3.2 - Kill spell
+
+        // 5.3 - Defense multiplier
+        // 5.3.1 - Initial value
+        // 5.3.2 - Penalties
+        // 5.3.2.1 - Target it toad or mini
+        // 5.3.2.2 - Self-targetting
+
+        // 5.4 - Evade chance
+        // 5.4.1 - Initial Value
+
+        // 5.5 - Net attack mult
+        
+        //=============================================
+        // 6 - MULTIPLY BASE DAMAGE BY NET ATTACK MULTIPLIER
+        //=============================================
+        
+        // final damage = base * netmult
+        
+        //=============================================
+        // 7 - APPLY FINAL DAMAGE BONUSES AND PENALTIES
+        //=============================================
+        
+        // 7.1 - Bonuses
+        // 7.1.1 - Cure 4
+
+        // 7.2 - Penalties
+        // 7.2.1 - Multiple Targets
+
+        // 7.3 - Minimum damage
+
+        // 7.4 - Status Attacks
+
+        //=============================================
+        // 8 - Finally, return the result
+        //=============================================
+
+        // return finalDamage;
+    }
 }
 
 namespace Utils {
