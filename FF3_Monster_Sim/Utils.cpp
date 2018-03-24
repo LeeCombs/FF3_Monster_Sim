@@ -6,163 +6,115 @@
 namespace ff3j {
 
 
-    int calculatePhysicalDamage(Monster attacker, Monster target) {
+    int calculatePhysicalDamage(Monster atkr, Monster target) {
 
         //=============================================
-        // 1 - Caculate Base Damage
-        //=============================================
-        int baseDamage = attacker.getAttack();
-
-        //=============================================
-        // 2 - Apply base damage bonus and penalties
+        // Determine base damage
         //=============================================
 
-        // 2.1 - Additive Bonus
-        int additiveBonus = 0;
+        int baseDamage = atkr.getAttack() + atkr.getHasteDmgBonus();
 
-        // 2.1.1 - Haste
-        // if (attacker.hasHaste()) additiveBonus += attacker.hasteAttackBonus;
-        baseDamage += additiveBonus;
+        // Apply bonuses (elemental weakness and vulnerable)
+        if (target.isWeakTo(atkr.getAttackElements()))
+            baseDamage *= 2;
 
-        // 2.2 - Multiplicate Bonus
-        int multiplicativeBonus = 0;
+        if (target.isVulnerable())
+            baseDamage *= 2;
 
-        // 2.2.1 - Elemental Weakness
-        // if (target.isweakto(attack.element)) baseDamage *= 2;
+        // Apply penalities (elemental resistance and toad/mini)
+        Element arr[3];
+        if (target.isResistantTo(atkr.getAttackElements()))
+            baseDamage = baseDamage / 2;
 
-        // 2.2.2 - Vulnerable State
-        // if (target.isVunerable()) baseDamage *= 2;
+        if (atkr.hasStatus(Status::mini) || atkr.hasStatus(Status::toad))
+            baseDamage = 0;
 
-        // 2.3 - Multiplicative Penatites
-
-        // 2.3.1 - Elemental Resist
-        // if (target.isresist(attack.element)) baseDamage /= 2;
-
-        // 2.3.2 - Toad and Mini
-        // if (attacker.hasStatus(Mini || Toad))) baseDamage = 0;
-
-        //=============================================
-        // 3 - Apply random range to base
-        //=============================================
+        // Apply random range to base damage
         baseDamage = Utils::getRandomInt(baseDamage, baseDamage * 1.5);
 
         //=============================================
-        // 4 - Subtract target's defense
+        // Subtract target's defense
         //=============================================
 
-        // 4.1 - Initial Defense
         int defense = target.getDefense();
 
         // 4.1.2 - Self-Targetting
-        // if attacker is targeting ally, defense = 0;
+        // if atkr is targeting ally, defense = 0;
 
-        // 4.2 - Defense Bonuses
+        // Apply bonuses (safe and defense command)
 
         // 4.2.1 - Safe Spell
-        // if (target.hasSafe()) defense += target.safeDefenseBonus;
+        defense += target.getSafeBonus();
 
         // 4.2.2 - Defend Command
         // if (target.hasDefended()) defense *= 4;
 
-        // 4.3 - Penalties
+        // Penalties
 
         // 4.3.1 - Vulnerable target
-        // if (target.isVulnerable()) defense = 0;
+        if (target.isVulnerable())
+            defense = 0;
 
-        // 4.4 - Base Damage Calculation
-        if (defense > 255)
-            defense = 255;
         baseDamage -= defense;
 
-        /// 4.5 - Misc
-        // if (target.hasMini || target.hasToad) defense && multipliers = 0;
-
 
         //=============================================
-        // 5 - Calculate net attack Muliplier
+        // Calculate net attack Muliplier
         //=============================================
 
-        // 5.1 - Attack Multiplier
+        // Determine attacker's attack multiplier and hit chance
+        int atkMult = atkr.getHits() + atkr.getHasteHitBonus();
+        int hitChance = atkr.getAccuracy();
 
-        // 5.1.1 - Initial Value
-        int atkMult = attacker.getHits();
-
-        // 5.1.2 - Bonuses
-
-        // 5.1.2.1 - Haste
-
-        // if (attacker.hasHaste()) atkMult += attacker.hasteMult;
+        // Enforce a 16-hit cap
         if (atkMult > 16)
             atkMult = 16;
 
-        // 5.2 - Hit %
+        // Apply Penalties (back row and blind)
+        // if (physical && (atkr.IsBackRow() || target.IsBackRow()) hitChance /= 2;
 
-        // 5.2.1 - Initial Value
-        int hitChance = attacker.getAccuracy();
+        if (atkr.hasStatus(Status::blind))
+            hitChance = hitChance / 2;
 
-        // 5.2.2 - Penalties
+        // Determine target's defense multiplier
+        int defMult = target.getBlocks();
+        int evadeChance = target.getEvasion();
 
-        // 5.2.2.1 - Backrow
-        // if (physical && (attacker.IsBackRow() || target.IsBackRow()) hitChance /= 2;
+        if (target.isVulnerable())
+            defMult = 0;
 
-        // 5.2.2.2 - Blind
-        // if (attacker.hasBlind()) hit /= 2;
-
-        // 5.3 - Defense Multiplier
-        int defMult = 0;
-
-        // 5.3.1 - Initial Value
-        defMult = target.getBlocks();
-
-        // 5.3.2 - Penalties
-
-        // 5.3.2.1 - Vulnerable
-        // if (target.isVulnerable()) defMult = 0;
-        
-        // 5.4 - Evade %
-        int evadeChance = 0;
-
-        // 5.4.1 - Initial Value
-        evadeChance = target.getEvasion();
-
-        // 5.5 - Net Attack Multiplier
+        // Determine the net attack multiplier
         int netMult = Utils::rollSuccesses(atkMult, hitChance) - Utils::rollSuccesses(defMult, evadeChance);
         // if (netMult <= 0) return "Miss";
 
         //=============================================
-        // 6 - Multiply base by net attack multipler
+        // Calculate final damage
         //=============================================
         if (baseDamage > 255)
             baseDamage = 255;
 
-        if (netMult > 16)
-            netMult = 16;
-
         int finalDamage = baseDamage * netMult;
 
-        //=============================================
-        // 7 - Apply final damage bonuses/penalities
-        //=============================================
-
-        // 7.1 - Minimum Damage
+        // Minimum Damage
         if (atkMult > 0 && finalDamage <= 0)
             finalDamage = 1;
 
-        // 7.2 - Status Attacks
-        for (int i = 0; i < netMult; i++) {
-            if (Utils::getRandomInt(0, 99) <= (hitChance - evadeChance)) {
-                // Successful hit
-                break;
+        // Attempt to apply status effects if the attack has them
+        if (atkr.getAttackStatus() != Status::none) {
+            for (int i = 0; i < netMult; i++) {
+                if (Utils::getRandomInt(0, 99) <= (hitChance - evadeChance)) {
+                    // Successful hit
+                    // TODO: Apply appropriate status based on attackStatus
+                    break;
+                }
             }
         }
 
-        //=============================================
-        // 8 - Finally, return the result
-        //=============================================
+        // Finally, return the result
         return finalDamage;
     }
 
-    int calculateSpellDamage(Spell spell, Monster attacker, Monster target) {
+    int calculateSpellDamage(Spell spell, Monster atkr, Monster target) {
 
         //=============================================
         // 1 - CALCULATE BASE DAMAGE
@@ -171,14 +123,14 @@ namespace ff3j {
 
         switch (spell.getType()) {
             case SpellType::black:
-                baseDamage += attacker.getIntellect() / 2;
+                baseDamage += atkr.getIntellect() / 2;
                 break;
             case SpellType::white:
                 // TODO: Non-offensive white magic skips this step
-                baseDamage += attacker.getMind() / 2;
+                baseDamage += atkr.getMind() / 2;
                 break;
             case SpellType::summon:
-                baseDamage += attacker.getIntellect();
+                baseDamage += atkr.getIntellect();
                 break;
             default:
                 // Error
@@ -215,7 +167,7 @@ namespace ff3j {
         int mDef = target.getMagicDefense();
 
         // 4.1.1 - Self-targetting
-        // if (attacker == target || target.isAllyTo(attacker)) mDef = 0;
+        // if (atkr == target || target.isAllyTo(atkr)) mDef = 0;
 
         // 4.2 - Bonuses
         // 4.2.1 - Safe
@@ -231,25 +183,26 @@ namespace ff3j {
         //=============================================
         // 5 - CALCULATE NET ATTACK MULTIPLIER
         //=============================================
-        
-        // 5.1 - AtkMult
-        // 5.2 - Hit chance
+
+        // 
+        // AtkMult and Hit chance
+        //
         int atkMult = 1;
         int hitChance = spell.getAccuracy();
 
         switch (spell.getType()) {
             case SpellType::black:
             case SpellType::terrain:
-                atkMult += (attacker.getIntellect() / 16) + (attacker.getLevel() / 16) + (attacker.getJobLevel() / 32);
-                hitChance += attacker.getIntellect() / 2;
+                atkMult += (atkr.getIntellect() / 16) + (atkr.getLevel() / 16) + (atkr.getJobLevel() / 32);
+                hitChance += atkr.getIntellect() / 2;
                 break;
             case SpellType::white:
-                atkMult += (attacker.getMind() / 16) + (attacker.getLevel() / 16) + (attacker.getJobLevel() / 32);
-                hitChance += attacker.getMind() / 2;
+                atkMult += (atkr.getMind() / 16) + (atkr.getLevel() / 16) + (atkr.getJobLevel() / 32);
+                hitChance += atkr.getMind() / 2;
                 break;
             case SpellType::summon:
-                atkMult += (attacker.getIntellect() / 8) + (((attacker.getJobLevel() / 8)*3)/2);
-                hitChance += attacker.getIntellect();
+                atkMult += (atkr.getIntellect() / 8) + (((atkr.getJobLevel() / 8)*3)/2);
+                hitChance += atkr.getIntellect();
                 break;
             case SpellType::item:
                 // atkMult is pre-determined by the item
@@ -260,26 +213,31 @@ namespace ff3j {
                 break;
         }
 
-        // 5.2.2 - Bonuses
-        // 5.2.2.1 - Toad and mini on allies
-        // if (spell == (Toad || Mini || Life || Life2) && target.isAllyTo(attacker)) hitChance = 100;
+        // Toad, Mini, and Life spells always hit allies
+        // if (spell == (Toad || Mini || Life || Life2) && target.isAllyTo(atkr)) hitChance = 100;
 
-        // 5.2.3 - Penalties
-        // 5.2.3.1 - Blind
-        // if (spell.getType() != SpellType::item && attacker.hasStatus(Status::Blind)) hitChance /= 2;
+        // If atkr is blind and not using an item, halve hit
+        if ((spell.getType() != SpellType::item) && atkr.hasStatus(Status::blind))
+            hitChance = hitChance / 2;
 
-        // 5.2.3.2 - Kill spell
-        // if (target.getLevel() >= (((attacker.getLevel()/2)*3)/2)) hitChance = 0;
+        // Kill spell misses if the target is too high level
+        if (target.getLevel() >= (((atkr.getLevel()/2)*3)/2))
+            hitChance = 0;
 
+        //
         // 5.3 - Defense multiplier
+        //
         int defMult = target.getMagicBlocks();
 
         // 5.3.1 - Penalties
         // 5.3.1.1 - Target it toad or mini
         // if (target.hasStatus(Mini || Toad || Buildup)) defMult = 0;
+        Status penaltyStatuses[2] = { Status::mini, Status::toad }; // TODO: Buildup
+        if (target.hasStatus(penaltyStatuses, 2))
+            defMult = 0;
 
         // 5.3.1.2 - Self-targetting
-        // if (attacker == target || target.isAllyTo(attacker)) defMult = 0;
+        // if (atkr == target || target.isAllyTo(atkr)) defMult = 0;
 
         // 5.4 - Evade chance
         int mEvade = target.getMagicResistance();
@@ -322,9 +280,7 @@ namespace ff3j {
             }
         }
 
-        //=============================================
-        // 8 - Finally, return the result
-        //=============================================
+        // Finally, return the result
         return finalDamage;
     }
 }

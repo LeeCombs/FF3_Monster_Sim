@@ -30,10 +30,11 @@ int WinMain()
         Monster mon;
         SpellResult res = castSpell(spell, mon, mon);
 
+
         // string s = copy
         // string &s = reference
-        // string const &s = unchangable reference
-        for (string const &s : res.results) {
+        // const string &s = unchangable reference
+        for (const string &s : res.results) {
             string str = s;
         }
 

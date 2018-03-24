@@ -11,16 +11,17 @@ namespace ff3j {
 
     // 0-9: Permanent status, >=10: Temporary Status
     enum class Status {
-        poison = 0, blind, mini, silence, toad, petrification, KO, 
+        none = 0,
+        poison = 1, blind, mini, silence, toad, petrification, KO, 
         confusion = 10, sleep, paralysus, thirdPartPetrify, halfPartPetrify, twoThirdPartPetrify
     };
 
     // Temporary enums
     enum class TempStatus {
-        confusion = 0, sleep, paralysis, halfPetrify, thirdPetrify, twoThirdPetrify
+        none = 0, confusion, sleep, paralysis, halfPetrify, thirdPetrify, twoThirdPetrify
     };
 
     enum class PermStatus {
-        poison = 0, blind, mini, silence, toad, petrification, KO
+        none = 0, poison, blind, mini, silence, toad, petrification, KO
     };
 }
