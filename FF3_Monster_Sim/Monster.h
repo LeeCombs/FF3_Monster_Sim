@@ -22,9 +22,13 @@ namespace ff3j {
 
         bool hasStatus(const Status &s);
         bool hasStatus(const Status[], const int length);
+        bool addStatus(const Status &s);
+        void removeStatus(const Status &s);
+
         bool isWeakTo(const Element &e);
         bool isWeakTo(const Element[], const int length);
         bool isWeakTo(const std::unordered_set<Element> &eSet);
+
         bool isResistantTo(const Element &e);
         bool isResistantTo(const Element[], const int length);
         bool isResistantTo(const std::unordered_set<Element> &eSet);
@@ -32,6 +36,7 @@ namespace ff3j {
         // Return whether or not the monster has a status that makes it vulnerable
         // These include Mini, Toad, and Buildup (in specific cases)
         bool isVulnerable();
+
 
         //=================================
         // Setters 

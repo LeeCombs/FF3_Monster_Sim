@@ -17,15 +17,27 @@ namespace ff3j {
     // Publics 
     //=================================
 
+
     bool Monster::hasStatus(const Status &s) {
         return Utils::SetContains(statuses, s);
     }
-
     bool Monster::hasStatus(const Status sArr[], const int length) {
         for (int i = 0; i < length; i++)
             if (Utils::SetContains(statuses, sArr[i]))
                 return true;
         return false;
+    }
+    bool Monster::addStatus(const Status &s) {
+        // Bosses are immune to status effects
+        if (isBoss || Utils::SetContains(statusImmunities, s))
+            return false;
+
+        // TODO: Add status sprite of the status, if it's new
+        return statuses.insert(s).second;
+    }
+    void Monster::removeStatus(const Status &s) {
+        // TODO: Remove status sprite of status removed, if it exists
+        statuses.erase(s);
     }
 
     bool Monster::isWeakTo(const Element &e) {
@@ -65,6 +77,7 @@ namespace ff3j {
         Status vulnStatuses[2] = { Status::mini, Status::toad };
         return hasStatus(vulnStatuses, 2);
     }
+
 
     //=================================
     // Getters 

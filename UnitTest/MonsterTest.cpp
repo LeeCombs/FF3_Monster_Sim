@@ -52,6 +52,24 @@ namespace UnitTest {
             Assert::IsTrue(mon.getStatusImmunities().empty());
         }
 
+        TEST_METHOD(LoadMonsterTest) {
+            // Load a known monster from data and ensure its stats loaded properly
+        }
+
+        TEST_METHOD(StatusTest) {
+            // Ensure a standard enemy with no immunities
+            Monster mon;
+            Assert::IsFalse(mon.hasStatus(Status::blind));
+            Assert::IsTrue(mon.addStatus(Status::blind));
+            Assert::IsFalse(mon.addStatus(Status::blind));
+            Assert::IsTrue(mon.hasStatus(Status::blind));
+            mon.removeStatus(Status::blind);
+            Assert::IsFalse(mon.hasStatus(Status::blind));
+
+            // TODO: Load a monster with blind immunity and ensure it cannot be added
+            // TODO: Load a boss monster and ensure no status effects can be added
+        }
+
     private:
         //
     };
