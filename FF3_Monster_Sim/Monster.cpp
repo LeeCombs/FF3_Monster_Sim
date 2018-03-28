@@ -119,6 +119,8 @@ namespace ff3j {
     // Setters 
     //=================================
 
+    // TODO: I'm assuming most of these will be hidden and 
+    // only accessible through the constructor.
     void Monster::setName(std::string n) { name = n; };
     void Monster::setHP(unsigned short us) { hp = us; };
     void Monster::setId(unsigned char uc) { id = uc; };

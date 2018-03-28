@@ -2,9 +2,11 @@
 #include <unordered_set>
 #include <random>
 #include "Monster.h"
+#include "Spell.h"
 
 namespace ff3j {
     int calculateDamage(Monster, Monster);
+    int calculateSpellDamage(Spell spell, Monster atkr, Monster target, int targetCount);
 }
 
 namespace Utils {

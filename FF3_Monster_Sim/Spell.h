@@ -4,7 +4,7 @@
 #include <unordered_set>
 
 namespace ff3j {
-    enum class SpellType { black, white, summon, item, ability, terrain };
+    enum class SpellType { black, whiteOffensive, whiteBuff, call, item, ability, terrain };
     enum class SpellEffect {
         // Damage
         damage, drainHP,
